@@ -17,10 +17,10 @@ export class AuthGuard implements CanActivate {
         return true;
       }
       let routeParameter = '';
-      if (state.url !== '/login' && state.url !== '/' && state.url !== '') {
+      if (state.url !== '/login-vendedor' && state.url !== '/' && state.url !== '') {
         routeParameter = '?returnUrl=' + state.url;
       }
-      return this.router.parseUrl('/login' + routeParameter);
+      return this.router.parseUrl('/login-vendedor' + routeParameter);
   }
 
 }

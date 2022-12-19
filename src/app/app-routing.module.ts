@@ -17,10 +17,6 @@ const routes: Routes = [
     component: SellerLoginComponent
   },
   {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
     path: 'productos/:filtros',
     component: ProductsListComponent,
     canActivate: [AuthGuard]

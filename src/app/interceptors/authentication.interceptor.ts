@@ -24,7 +24,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         (event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
             if (event.status === 403) {
-              this.router.navigate(['login']);
+              this.router.navigate(['login-vendedor']);
             }
             this.authService.setAccessToken(event.headers.get('accessToken'));
           }
@@ -35,7 +35,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         error => {
           if (error.status === 401) {
             let queryParams = null;
-            const route = this.authService.isSeller() ? '/login-vendedor' : '/login';
+            const route = '/login-vendedor';
             if (this.router.url !== '/login' && this.router.url !== '/login-vendedor'
               && this.router.url !== '/' && this.router.url !== '') {
               queryParams = { returnUrl: this.router.url };
