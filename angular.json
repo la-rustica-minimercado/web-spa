@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "repuestos-motos-spa": {
+    "web-spa": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/repuestos-motos-spa",
+            "outputPath": "dist/web-spa",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -109,5 +109,5 @@
       }
     }
   },
-  "defaultProject": "repuestos-motos-spa"
+  "defaultProject": "web-spa"
 }
