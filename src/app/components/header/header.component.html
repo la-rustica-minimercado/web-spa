@@ -2,9 +2,9 @@
   <nav class="navbar navbar-expand-lg">
     <div class="mobile-navbar-background" *ngIf="this.showNavbar" (click)="this.navbarBtnClick()"></div>
     <div class="container" [ngClass]="{'justify-content-center': !this.authService.isAuthenticated()}">
-      <a class="navbar-brand" href="#"
-        ><h2>Moto<em>Landia</em></h2></a
-      >
+      <a class="navbar-brand" href="#">
+        <img src="./../../../assets/la-rustica-logo.jpg" alt="La rustica Logo">
+      </a>
       <button
         class="navbar-toggler"
         type="button"

@@ -39,6 +39,12 @@ header .navbar {
 	float: 	left;
 	outline: none;
 }
+.navbar a.navbar-brand {
+	padding: 0;
+}
+.navbar a.navbar-brand img {
+	max-width: 200px;
+}
 .navbar.navbar-expand-lg .container {
     align-items: baseline;
 }
