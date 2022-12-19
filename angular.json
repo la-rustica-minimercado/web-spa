@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "repuestos-motos-spa": {
+    "web-spa": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/repuestos-motos-spa",
+            "outputPath": "dist/web-spa",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -75,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "repuestos-motos-spa:build:production"
+              "browserTarget": "web-spa:build:production"
             },
             "development": {
-              "browserTarget": "repuestos-motos-spa:build:development"
+              "browserTarget": "web-spa:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "repuestos-motos-spa:build"
+            "browserTarget": "web-spa:build"
           }
         },
         "test": {
@@ -109,5 +109,5 @@
       }
     }
   },
-  "defaultProject": "repuestos-motos-spa"
+  "defaultProject": "web-spa"
 }

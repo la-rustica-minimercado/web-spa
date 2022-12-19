@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/repuestos-motos-spa'),
+      dir: require('path').join(__dirname, './coverage/web-spa'),
       subdir: '.',
       reporters: [
         { type: 'html' },
