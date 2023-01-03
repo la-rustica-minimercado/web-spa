@@ -1,6 +1,7 @@
 <div class="container products">
   <div class="row" *ngIf="this.isSeller">
     <div class="col-12 mt-3">
+      <label class="form-label">Seleccione un cliente:</label>
       <select class="form-select" (change)="this.clientChangeSelection()" [(ngModel)]="this.selectedClientId">
         <option value="-1" hidden selected>Seleccione un cliente</option>
         <option *ngFor="let c of this.clientList" [value]="c.clientId">{{ c.name }}</option>
