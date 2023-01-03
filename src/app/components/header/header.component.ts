@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
+import { User } from '../../interface/user';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +13,20 @@ export class HeaderComponent {
   @ViewChild('navBar') navBar: ElementRef;
 
   public showNavbar: boolean = false;
+  public isAuthenticated: boolean = false;
+  public userInfo: User | null = null;
 
   constructor(private router: Router, public authService: AuthenticationService) {
+    this.isAuthenticated = this.authService.isAuthenticated();
+    this.userInfo = this.authService.getUserInfo();
+    this.authService.getLogoutSubject().subscribe({
+      next: value => {
+        if (value) {
+          this.isAuthenticated = false;
+          this.userInfo = null;
+        }
+      }
+    })
   }
 
   navbarBtnClick() {
@@ -29,13 +42,8 @@ export class HeaderComponent {
 
   logout() {
     this.navbarBtnClick();
-    const isSeller = this.authService.isSeller();
     this.authService.logout();
-    if (isSeller) {
-      this.router.navigate(['/login-vendedor']);
-    } else {
-      this.router.navigate(['/login']);
-    }
+    this.router.navigate(['/login-vendedor']);
   }
 
 }

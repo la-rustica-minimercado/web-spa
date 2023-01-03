@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Subject } from 'rxjs';
 import { ApiService } from './api.service';
 import { User } from '../interface/user';
 import { Client } from '../interface/client';
@@ -32,6 +32,11 @@ export class AuthenticationService {
    * Object that contains the selected client information
    */
   private _selectedClient: Client | undefined;
+
+  /**
+   * Loout subject to emit an event when client log out
+   */
+  private _logoutSubject: Subject<boolean> = new Subject<boolean>();
 
   constructor(private apiService: ApiService) {
     this.loadStoredUserInformation();
@@ -121,6 +126,10 @@ export class AuthenticationService {
     return this._userInformation;
   }
 
+  public getLogoutSubject() {
+    return this._logoutSubject;
+  }
+
   /**
    * Method to call the login endpoint
    * @param userName User name
@@ -161,6 +170,7 @@ export class AuthenticationService {
     this._isAuthenticated = false;
     this.setAccessToken(null);
     this.removeStoredUserInfromation();
+    this._logoutSubject.next(true);
   }
 
   /**
