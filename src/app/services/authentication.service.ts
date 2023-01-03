@@ -3,6 +3,7 @@ import { map, Subject } from 'rxjs';
 import { ApiService } from './api.service';
 import { User } from '../interface/user';
 import { Client } from '../interface/client';
+import { LoginInfo } from '../interface/loginInfo';
 
 @Injectable({
   providedIn: 'root',
@@ -34,9 +35,9 @@ export class AuthenticationService {
   private _selectedClient: Client | undefined;
 
   /**
-   * Loout subject to emit an event when client log out
+   * auth subject to emit an event when client login/logout
    */
-  private _logoutSubject: Subject<boolean> = new Subject<boolean>();
+  private _authSubject: Subject<LoginInfo> = new Subject<LoginInfo>();
 
   constructor(private apiService: ApiService) {
     this.loadStoredUserInformation();
@@ -50,6 +51,10 @@ export class AuthenticationService {
       this._userInformation = value.userInformation as User;
       this._selectedClient = value.selectedClient ? value.selectedClient as Client : undefined;
       this._isAuthenticated = this._accessToken ? true : false;
+      this._authSubject.next({
+        isAuthenticated: this._isAuthenticated,
+        userInfo: this.getUserInfo(),
+      });
     }
   }
 
@@ -126,8 +131,8 @@ export class AuthenticationService {
     return this._userInformation;
   }
 
-  public getLogoutSubject() {
-    return this._logoutSubject;
+  public getAuthSubject() {
+    return this._authSubject;
   }
 
   /**
@@ -161,6 +166,10 @@ export class AuthenticationService {
           this._isAuthenticated = true;
           this._userInformation = response as User;
           this.storeUserInformation();
+          this._authSubject.next({
+            isAuthenticated: this._isAuthenticated,
+            userInfo: this.getUserInfo(),
+          });
           return response;
         })
       );
@@ -170,7 +179,10 @@ export class AuthenticationService {
     this._isAuthenticated = false;
     this.setAccessToken(null);
     this.removeStoredUserInfromation();
-    this._logoutSubject.next(true);
+    this._authSubject.next({
+      isAuthenticated: this._isAuthenticated,
+      userInfo: this.getUserInfo(),
+    });
   }
 
   /**

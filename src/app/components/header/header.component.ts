@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../interface/user';
@@ -8,7 +8,7 @@ import { User } from '../../interface/user';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
   @ViewChild('navBar') navBar: ElementRef;
 
@@ -16,17 +16,19 @@ export class HeaderComponent {
   public isAuthenticated: boolean = false;
   public userInfo: User | null = null;
 
-  constructor(private router: Router, public authService: AuthenticationService) {
-    this.isAuthenticated = this.authService.isAuthenticated();
-    this.userInfo = this.authService.getUserInfo();
-    this.authService.getLogoutSubject().subscribe({
+  constructor(
+    private router: Router,
+    private cd: ChangeDetectorRef,
+    public authService: AuthenticationService
+  ) { }
+  
+  ngOnInit(): void {
+    this.authService.getAuthSubject().subscribe({
       next: value => {
-        if (value) {
-          this.isAuthenticated = false;
-          this.userInfo = null;
-        }
+        this.isAuthenticated = value.isAuthenticated;
+        this.userInfo = value.isAuthenticated ? value.userInfo : null;
       }
-    })
+    });
   }
 
   navbarBtnClick() {
