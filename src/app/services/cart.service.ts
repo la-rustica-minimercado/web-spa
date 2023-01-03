@@ -9,7 +9,7 @@ import { Product } from '../interface/product';
 export class CartService {
 
   private cartItems: CartItem[] = [];
-  private cartItemsStorageKey: string = 'cart-items';
+  private cartItemsStorageKey: string = 'la-rustica-cart-items';
 
   constructor(private authService: AuthenticationService) {
     this.getStoredCart();

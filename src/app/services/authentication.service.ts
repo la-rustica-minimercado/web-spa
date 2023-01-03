@@ -21,7 +21,7 @@ export class AuthenticationService {
   /**
    * Key to store the user information in local storage
    */
-  private _localStorageKey: string = 'userInfo';
+  private _localStorageKey: string = 'la-rustica-userInfo';
 
   /**
    * Object that contains the user information
