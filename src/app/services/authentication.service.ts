@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { map, Subject } from 'rxjs';
+import { BehaviorSubject, map, Subject } from 'rxjs';
 import { ApiService } from './api.service';
 import { User } from '../interface/user';
 import { Client } from '../interface/client';
@@ -37,9 +37,15 @@ export class AuthenticationService {
   /**
    * auth subject to emit an event when client login/logout
    */
-  private _authSubject: Subject<LoginInfo> = new Subject<LoginInfo>();
+  private _authSubject: BehaviorSubject<LoginInfo>;
 
   constructor(private apiService: ApiService) {
+    this._authSubject = new BehaviorSubject<LoginInfo>(
+      {
+        isAuthenticated: this._isAuthenticated,
+        userInfo: this.getUserInfo()
+      }
+    );
     this.loadStoredUserInformation();
   }
 
@@ -53,7 +59,7 @@ export class AuthenticationService {
       this._isAuthenticated = this._accessToken ? true : false;
       this._authSubject.next({
         isAuthenticated: this._isAuthenticated,
-        userInfo: this.getUserInfo(),
+        userInfo: this.getUserInfo()
       });
     }
   }

@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
       next: value => {
         this.isAuthenticated = value.isAuthenticated;
         this.userInfo = value.isAuthenticated ? value.userInfo : null;
+        this.cd.detectChanges();
       }
     });
   }
