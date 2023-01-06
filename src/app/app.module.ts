@@ -19,6 +19,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
 import { SellerLoginComponent } from './pages/seller-login/seller-login.component';
 import { ProductItemComponent } from './components/product-item/product-item.component';
+import { NewClientComponent } from './pages/new-client/new-client.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ProductItemComponent } from './components/product-item/product-item.com
     HeaderComponent,
     FooterComponent,
     SellerLoginComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    NewClientComponent
   ],
   imports: [
     BrowserModule,

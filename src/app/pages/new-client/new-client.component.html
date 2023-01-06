@@ -1,0 +1,78 @@
+<div class="container products">
+  <div class="row">
+    <div class="col-12 mt-3">
+        <h3>Nuevo Cliente</h3>
+        <p>Complete el siguiente formulario para crear un nuevo cliente en la aplicación.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-4">
+        <label>Apellido y nombre:</label>
+        <input type="text" class="form-control" [(ngModel)]="this.client.name">
+        <div class="text-danger" *ngIf="this.errors.nameError">
+            Ingrese un nombre.
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+        <label>Domicilio:</label>
+        <input type="text" class="form-control" [(ngModel)]="this.client.address">
+        <div class="text-danger" *ngIf="this.errors.addressError">
+            Ingrese un domicilio.
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+        <label>Teléfono:</label>
+        <input type="text" class="form-control" [(ngModel)]="this.client.tel">
+        <div class="text-danger" *ngIf="this.errors.telError">
+            Ingrese un teléfono.
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+        <label>Email:</label>
+        <input type="text" class="form-control" [(ngModel)]="this.client.email">
+        <div class="text-danger" *ngIf="this.errors.emailError">
+            Ingrese un email.
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+        <label>Tipo de documento:</label>
+        <select class="form-select" [(ngModel)]="this.client.idType">
+            <option value="-1" selected>Seleccione una opción</option>
+            <option *ngFor="let o of this.clientDocType" [value]="o.type">{{ o.desc }}</option>
+        </select>
+        <div class="text-danger" *ngIf="this.errors.idTypeError">
+            Seleccione un tipo de documento.
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+        <label>Número de documento:</label>
+        <input type="text" class="form-control" [(ngModel)]="this.client.idNumber">
+        <div class="text-danger" *ngIf="this.errors.idNumberError">
+            Ingrese un número de documento.
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4">
+        <label>Condición IVA:</label>
+        <select class="form-select" [(ngModel)]="this.client.VATCondition">
+            <option value="-1" selected>Seleccione una opción</option>
+            <option *ngFor="let o of this.clientVAT" [value]="o">{{ o }}</option>
+        </select>
+        <div class="text-danger" *ngIf="this.errors.VATCondError">
+            Seleccione una condición de IVA.
+        </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12 text-center">
+        <div class="text-danger" *ngIf="this.errors.createClientError">
+            Se produjo un error al guardar el cliente.
+        </div>
+        <div class="text-danger" *ngIf="this.errors.existingIdNumberError">
+            Número de documento ya usado.
+        </div>
+    </div>
+    <div class="col-12 text-center">
+        <button class="btn btn-inline btn-success" (click)="this.addClientBtnClick()">Agregar cliente</button>
+    </div>
+  </div>
+</div>

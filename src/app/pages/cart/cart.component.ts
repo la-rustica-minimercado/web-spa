@@ -52,7 +52,7 @@ export class CartComponent {
       orderItems: this.cartItems
     }
 
-    if (this.isSeller) {
+    if (this.isSeller && this.selectedClient.clientId) {
       order.clientId = this.selectedClient.clientId;
       order.sellerId = userInfo.id;
     }

@@ -37,7 +37,7 @@ export class ProductsListComponent implements OnInit {
     this.userInfo = this.authService.getUserInfo();
     this.isSeller = this.authService.isSeller();
     const selectedClient = this.authService.getSelectedClient();
-    this.selectedClientId = selectedClient ? selectedClient.clientId : -1;
+    this.selectedClientId = selectedClient && selectedClient.clientId ? selectedClient.clientId : -1;
   }
 
   ngOnInit(): void {

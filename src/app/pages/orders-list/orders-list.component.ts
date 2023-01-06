@@ -40,7 +40,7 @@ export class OrdersListComponent {
     this.isSeller = this.auth.isSeller();
     if (!this.isSeller) {
       this.clientId = userInfo.id;
-    } else if (selectedClient) {
+    } else if (selectedClient && selectedClient.clientId) {
       this.clientId = selectedClient.clientId;
     }
     if (this.clientId >= 0) {
